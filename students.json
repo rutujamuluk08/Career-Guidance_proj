@@ -1,0 +1,10 @@
+{
+    "uid": {
+      "email": "student@example.com",
+      "role": "student", 
+      "testScore": 85,
+      "cgpa": 7.5,
+      "collegePreference": ["Engineering", "Management"]
+    }
+  }
+  

@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Aptitude Test</title>
+</head>
+<body>
+  <h1>Aptitude Test</h1>
+  <form id="aptitude-test-form">
+    <label for="q1">Question 1: What is 5 + 3?</label><br>
+    <input type="radio" name="q1" value="correct"> 8<br>
+    <input type="radio" name="q1" value="wrong"> 7<br>
+    <input type="radio" name="q1" value="wrong"> 6<br>
+    <input type="radio" name="q1" value="wrong"> 9<br><br>
+
+    <label for="q2">Question 2: What is the capital of India?</label><br>
+    <input type="radio" name="q2" value="wrong"> London<br>
+    <input type="radio" name="q2" value="correct"> New Delhi<br>
+    <input type="radio" name="q2" value="wrong"> Paris<br>
+    <input type="radio" name="q2" value="wrong"> Tokyo<br><br>
+
+    <button type="submit">Submit Test</button>
+  </form>
+
+  <script>
+    document.getElementById("aptitude-test-form").addEventListener("submit", (event) => {
+      event.preventDefault();
+      const answers = [
+        { question: "q1", correctAnswer: "correct" },
+        { question: "q2", correctAnswer: "correct" }
+      ];
+
+      let score = 0;
+
+      answers.forEach((answer) => {
+        const selectedAnswer = document.querySelector(`input[name="${answer.question}"]:checked`);
+        if (selectedAnswer && selectedAnswer.value === answer.correctAnswer) {
+          score += 1;
+        }
+      });
+
+      alert(`Your Score: ${score}`);
+      // Store score in Firebase
+      const userId = firebase.auth().currentUser.uid;
+      const db = firebase.firestore();
+      db.collection("students").doc(userId).update({
+        testScore: score
+      });
+    });
+  </script>
+</body>
+</html>

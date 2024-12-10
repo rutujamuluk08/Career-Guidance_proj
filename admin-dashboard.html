@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin Dashboard</title>
+</head>
+<body>
+  <h1>Admin Dashboard</h1>
+  
+  <form id="add-college-form">
+    <input type="text" id="college-name" placeholder="College Name" required>
+    <input type="text" id="location" placeholder="Location" required>
+    <input type="number" id="ranking" placeholder="Ranking" required>
+    <input type="number" id="fees" placeholder="Fees" required>
+    <button type="submit">Add College</button>
+  </form>
+
+  <script src="https://www.gstatic.com/firebasejs/9.0.0/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.0.0/firebase-firestore.js"></script>
+  <script>
+    const db = firebase.firestore();
+
+    // Add college functionality
+    document.getElementById("add-college-form").addEventListener("submit", (e) => {
+      e.preventDefault();
+      const collegeName = document.getElementById("college-name").value;
+      const location = document.getElementById("location").value;
+      const ranking = parseInt(document.getElementById("ranking").value);
+      const fees = parseInt(document.getElementById("fees").value);
+
+      db.collection("colleges").add({
+        name: collegeName,
+        location: location,
+        ranking: ranking,
+        fees: fees,
+        eligibility: {
+          cgpa: 7.0, // Example eligibility, update as needed
+          examScore: 75
+        }
+      }).then(() => {
+        alert("College added successfully!");
+      }).catch((error) => {
+        console.error("Error adding college: ", error);
+      });
+    });
+  </script>
+</body>
+</html>

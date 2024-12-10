@@ -1,0 +1,14 @@
+{
+    "collegeId": {
+      "name": "ABC College",
+      "location": "India",
+      "ranking": 5,
+      "courses": ["Engineering", "Management"],
+      "fees": 50000,
+      "eligibility": {
+        "cgpa": 7.0,
+        "examScore": 75
+      }
+    }
+  }
+  
